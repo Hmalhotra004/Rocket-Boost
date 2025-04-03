@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour {
     private void OnCollisionEnter(Collision other) {
@@ -11,8 +12,13 @@ public class CollisionHandler : MonoBehaviour {
                 // Damage the enemy
                 break;
             default:
-                Debug.Log("GG");
+            reloadLevel();
                 break;
         }
+    }
+
+    private void reloadLevel() {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene);
     }
 }
