@@ -7,7 +7,7 @@ public class CollisionHandler : MonoBehaviour {
             case "Friendly":
                 break;
             case "Finish":
-                Debug.Log("Level Complete!");
+                loadNextLevel();
                 break;
             default:
             reloadLevel();
