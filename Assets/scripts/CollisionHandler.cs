@@ -5,6 +5,9 @@ public class CollisionHandler : MonoBehaviour {
     [SerializeField] float levelLoadDelay = 2f;
     [SerializeField] AudioClip crashSound;
     [SerializeField] AudioClip successSound;
+    [SerializeField] ParticleSystem susccessParticles;
+    [SerializeField] ParticleSystem crashParticles;
+
     AudioSource audioSource;
 
     bool isContollable = true;
@@ -33,6 +36,7 @@ public class CollisionHandler : MonoBehaviour {
         audioSource.Stop();
         GetComponent<Movement>().enabled = false;
         audioSource.PlayOneShot(successSound);
+        susccessParticles.Play();
         Invoke("loadNextLevel",levelLoadDelay);
     }
 
@@ -41,6 +45,7 @@ public class CollisionHandler : MonoBehaviour {
         audioSource.Stop();
         GetComponent<Movement>().enabled = false;
         audioSource.PlayOneShot(crashSound);
+        crashParticles.Play();
         Invoke("reloadLevel", levelLoadDelay);
     }
 
