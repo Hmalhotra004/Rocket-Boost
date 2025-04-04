@@ -6,6 +6,9 @@ public class Movement : MonoBehaviour
     [SerializeField] InputAction thrust;
     [SerializeField] InputAction rotation;
     [SerializeField] AudioClip engineSound;
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem rightEngineParticles;
+    [SerializeField] ParticleSystem leftEngineParticles;
 
     [SerializeField] float thrustStrength = 100f;
     [SerializeField] float rotationStrength = 100f;
@@ -34,7 +37,10 @@ public class Movement : MonoBehaviour
             if(!audioSource.isPlaying){
                 audioSource.PlayOneShot(engineSound);
             }
+            if(!mainEngineParticles.isPlaying) 
+                mainEngineParticles.Play();
         } else {
+            mainEngineParticles.Stop();
             audioSource.Stop();
         }
     }
@@ -44,10 +50,18 @@ public class Movement : MonoBehaviour
         if(rotationInput < 0)
         {
             ApplyRotation(rotationStrength);
-        }
-        else if(rotationInput > 0) {
+            if(!rightEngineParticles.isPlaying) 
+                leftEngineParticles.Stop();
+                rightEngineParticles.Play();
+        } else if(rotationInput > 0) {
             ApplyRotation(-rotationStrength);
-        } 
+            if(!leftEngineParticles.isPlaying) 
+                rightEngineParticles.Stop();
+                leftEngineParticles.Play();
+        } else {
+            rightEngineParticles.Stop();
+            leftEngineParticles.Stop();
+        }   
     }
 
     private void ApplyRotation(float rotate)
