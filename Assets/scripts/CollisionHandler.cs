@@ -26,9 +26,7 @@ public class CollisionHandler : MonoBehaviour {
         if(Keyboard.current.lKey.wasPressedThisFrame) {
             loadNextLevel();
         } else if( Keyboard.current.cKey.wasPressedThisFrame) {
-            Debug.Log("Collision toggled");
             isCollidable = !isCollidable;
-            Debug.Log(isCollidable);
         }
     }
 
